@@ -11,8 +11,8 @@
 	<groupId>com.chabbay</groupId>
 	<artifactId>SE-Reisebuchungen</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>demo</name>
-	<description>Demo project for Spring Boot</description>
+	<name>SE-Reisebuchungen</name>
+	<description>Hotelzimmer- und Dienstleistungsbuchungen eines Reiseunternehmens</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
