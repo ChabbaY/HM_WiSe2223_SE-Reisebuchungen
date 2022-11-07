@@ -1,4 +1,4 @@
-package com.chabbay.data;
+package com.chabbay.dataobjects;
 
 import com.chabbay.errorhandling.HotelNotFoundException;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

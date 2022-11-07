@@ -1,4 +1,4 @@
-package com.chabbay.data;
+package com.chabbay.dataobjects;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

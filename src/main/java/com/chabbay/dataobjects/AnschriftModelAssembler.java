@@ -1,4 +1,4 @@
-package com.chabbay.data;
+package com.chabbay.dataobjects;
 
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
@@ -13,11 +13,11 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
  * @author Linus Englert
  */
 @Component
-public class HotelModelAssembler implements RepresentationModelAssembler<Hotel, EntityModel<Hotel>> {
+public class AnschriftModelAssembler implements RepresentationModelAssembler<Anschrift, EntityModel<Anschrift>> {
     @Override
-    public EntityModel<Hotel> toModel(Hotel entity) {
+    public EntityModel<Anschrift> toModel(Anschrift entity) {
         return EntityModel.of(entity,
-                linkTo(methodOn(HotelController.class).select(entity.getId())).withSelfRel(),
-                linkTo(methodOn(HotelController.class).selectAll()).withRel("hotels"));
+                linkTo(methodOn(AnschriftController.class).select(entity.getId())).withSelfRel(),
+                linkTo(methodOn(AnschriftController.class).selectAll()).withRel("anschriften"));
     }
 }
