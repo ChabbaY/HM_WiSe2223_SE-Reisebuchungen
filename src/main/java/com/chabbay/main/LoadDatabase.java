@@ -1,9 +1,9 @@
 package com.chabbay.main;
 
-import com.chabbay.dataobjects.Anschrift;
-import com.chabbay.dataobjects.Hotel;
-import com.chabbay.dataobjects.HotelRepository;
-import com.chabbay.dataobjects.AnschriftRepository;
+import com.chabbay.dataobjects.objects.Anschrift;
+import com.chabbay.dataobjects.objects.Hotel;
+import com.chabbay.dataobjects.repositories.HotelRepository;
+import com.chabbay.dataobjects.repositories.AnschriftRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;

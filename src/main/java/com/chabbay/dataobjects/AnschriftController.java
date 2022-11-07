@@ -1,6 +1,8 @@
 package com.chabbay.dataobjects;
 
-import com.chabbay.errorhandling.AnschriftNotFoundException;
+import com.chabbay.dataobjects.objects.Anschrift;
+import com.chabbay.dataobjects.repositories.AnschriftRepository;
+import com.chabbay.errorhandling.exceptions.AnschriftNotFoundException;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -9,11 +11,7 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 /**
  * controller for the anschrift entity that defines endpoints
@@ -23,7 +21,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @RestController
 @Configuration
 @EnableAutoConfiguration
-@ComponentScan(basePackages = {"com.chabbay","com.chabbay.dataobjects"})
+@ComponentScan(basePackages = {"com.chabbay"})
 public class AnschriftController {
     private final AnschriftRepository repository;
     private final AnschriftModelAssembler assembler;
@@ -37,7 +35,7 @@ public class AnschriftController {
     @GetMapping("/anschriften")
     CollectionModel<EntityModel<Anschrift>> selectAll() {
         List<EntityModel<Anschrift>> list = repository.findAll().stream().map(assembler::toModel).toList();
-        return CollectionModel.of(list, linkTo(methodOn(AnschriftController.class).selectAll()).withSelfRel());
+        return assembler.toCollection(list);
     }
 
     //select

@@ -1,5 +1,6 @@
-package com.chabbay.errorhandling;
+package com.chabbay.errorhandling.advice;
 
+import com.chabbay.errorhandling.exceptions.HotelNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -12,11 +13,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * @author Linus Englert
  */
 @ControllerAdvice
-public class AnschriftNotFoundAdvice {
+public class HotelNotFoundAdvice {
     @ResponseBody
-    @ExceptionHandler(AnschriftNotFoundException.class)
+    @ExceptionHandler(HotelNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String anschriftNotFoundHandler(AnschriftNotFoundException e) {
+    String hotelNotFoundHandler(HotelNotFoundException e) {
         if (e == null) return "";
         return e.getMessage();
     }

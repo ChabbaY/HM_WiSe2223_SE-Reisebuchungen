@@ -1,5 +1,6 @@
-package com.chabbay.dataobjects;
+package com.chabbay.dataobjects.repositories;
 
+import com.chabbay.dataobjects.objects.Anschrift;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

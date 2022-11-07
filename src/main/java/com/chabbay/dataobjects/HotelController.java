@@ -1,6 +1,8 @@
 package com.chabbay.dataobjects;
 
-import com.chabbay.errorhandling.HotelNotFoundException;
+import com.chabbay.dataobjects.objects.Hotel;
+import com.chabbay.dataobjects.repositories.HotelRepository;
+import com.chabbay.errorhandling.exceptions.HotelNotFoundException;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -9,11 +11,7 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 /**
  * controller for the hotel entity that defines endpoints
@@ -37,7 +35,7 @@ public class HotelController {
     @GetMapping("/hotels")
     CollectionModel<EntityModel<Hotel>> selectAll() {
         List<EntityModel<Hotel>> list = repository.findAll().stream().map(assembler::toModel).toList();
-        return CollectionModel.of(list, linkTo(methodOn(HotelController.class).selectAll()).withSelfRel());
+        return assembler.toCollection(list);
     }
 
     //select

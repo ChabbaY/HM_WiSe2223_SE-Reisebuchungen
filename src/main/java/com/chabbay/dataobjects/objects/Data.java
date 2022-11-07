@@ -1,4 +1,4 @@
-package com.chabbay.dataobjects;
+package com.chabbay.dataobjects.objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

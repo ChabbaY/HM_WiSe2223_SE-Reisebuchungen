@@ -1,4 +1,4 @@
-package com.chabbay.dataobjects;
+package com.chabbay.dataobjects.objects;
 
 import java.util.Objects;
 import javax.persistence.Entity;
