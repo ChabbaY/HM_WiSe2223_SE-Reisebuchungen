@@ -10,9 +10,7 @@ import javax.persistence.Entity;
  */
 @Entity
 public class Anschrift extends Data {
-    private String anrede;
-    private String telefon;
-    private String email;
+    private String anrede, telefon, email;
 
     public Anschrift() {}
     public Anschrift(String anrede, String telefon, String email) {
@@ -46,8 +44,10 @@ public class Anschrift extends Data {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Anschrift value)) return false;
-        return Objects.equals(this.id, value.id) && Objects.equals(this.anrede, value.anrede) &&
-                Objects.equals(this.telefon, value.telefon) && Objects.equals(this.email, value.email);
+        return Objects.equals(this.id, value.id) &&
+                Objects.equals(this.anrede, value.anrede) &&
+                Objects.equals(this.telefon, value.telefon) &&
+                Objects.equals(this.email, value.email);
     }
     @Override
     public int hashCode() {
@@ -55,7 +55,7 @@ public class Anschrift extends Data {
     }
     @Override
     public String toString() {
-        return String.format("Anschrift{id=%s, anrede=%s, telefon=%s, email=%s}", this.id, this.anrede, this.telefon,
-                this.email);
+        return String.format("Anschrift{id=%s, anrede=%s, telefon=%s, email=%s}",
+                this.id, this.anrede, this.telefon, this.email);
     }
 }

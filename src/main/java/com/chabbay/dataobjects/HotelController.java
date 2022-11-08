@@ -25,6 +25,7 @@ import java.util.List;
 public class HotelController {
     private final HotelRepository repository;
     private final HotelModelAssembler assembler;
+    private final String PATH = "/hotels";
 
     public HotelController(HotelRepository repository, HotelModelAssembler assembler) {
         this.repository = repository;
@@ -32,28 +33,28 @@ public class HotelController {
     }
 
     //select all
-    @GetMapping("/hotels")
+    @GetMapping(PATH)
     CollectionModel<EntityModel<Hotel>> selectAll() {
         List<EntityModel<Hotel>> list = repository.findAll().stream().map(assembler::toModel).toList();
         return assembler.toCollection(list);
     }
 
     //select
-    @GetMapping("/hotels/{id}")
+    @GetMapping(PATH + "/{id}")
     EntityModel<Hotel> select(@PathVariable Long id) {
         Hotel value = repository.findById(id).orElseThrow(() -> new HotelNotFoundException(id));
         return assembler.toModel(value);
     }
 
     //insert
-    @PostMapping("/hotels")
+    @PostMapping(PATH)
     ResponseEntity<?> insert(@RequestBody Hotel value) {
         EntityModel<Hotel> entityModel = assembler.toModel(repository.save(value));
         return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
     }
 
     //update
-    @PutMapping("/hotels/{id}")
+    @PutMapping(PATH + "/{id}")
     ResponseEntity<?> update(@PathVariable Long id, @RequestBody Hotel value) {
         Hotel updated =  repository.findById(id).map(v -> {
             v.setName(value.getName());
@@ -63,12 +64,12 @@ public class HotelController {
             return repository.save(value);
         });
 
-        EntityModel<Hotel>  entityModel = assembler.toModel(updated);
+        EntityModel<Hotel> entityModel = assembler.toModel(updated);
         return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
     }
 
     //delete
-    @DeleteMapping("/hotels/{id}")
+    @DeleteMapping(PATH + "/{id}")
     ResponseEntity<?> delete(@PathVariable Long id) {
         repository.deleteById(id);
         return ResponseEntity.noContent().build();

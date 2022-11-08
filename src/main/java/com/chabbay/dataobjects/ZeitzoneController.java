@@ -1,8 +1,8 @@
 package com.chabbay.dataobjects;
 
-import com.chabbay.dataobjects.objects.Anschrift;
-import com.chabbay.dataobjects.repositories.AnschriftRepository;
-import com.chabbay.errorhandling.exceptions.AnschriftNotFoundException;
+import com.chabbay.dataobjects.objects.Zeitzone;
+import com.chabbay.dataobjects.repositories.ZeitzoneRepository;
+import com.chabbay.errorhandling.exceptions.ZeitzoneNotFoundException;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * controller for the anschrift entity that defines endpoints
+ * controller for the hotel entity that defines endpoints
  *
  * @author Linus Englert
  */
@@ -22,51 +22,50 @@ import java.util.List;
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan(basePackages = {"com.chabbay"})
-public class AnschriftController {
-    private final AnschriftRepository repository;
-    private final AnschriftModelAssembler assembler;
-    private final String PATH = "/anschriften";
+public class ZeitzoneController {
+    private final ZeitzoneRepository repository;
+    private final ZeitzoneModelAssembler assembler;
+    private final String PATH = "/zeitzonen";
 
-    public AnschriftController(AnschriftRepository repository, AnschriftModelAssembler assembler) {
+    public ZeitzoneController(ZeitzoneRepository repository, ZeitzoneModelAssembler assembler) {
         this.repository = repository;
         this.assembler = assembler;
     }
 
     //select all
     @GetMapping(PATH)
-    CollectionModel<EntityModel<Anschrift>> selectAll() {
-        List<EntityModel<Anschrift>> list = repository.findAll().stream().map(assembler::toModel).toList();
+    CollectionModel<EntityModel<Zeitzone>> selectAll() {
+        List<EntityModel<Zeitzone>> list = repository.findAll().stream().map(assembler::toModel).toList();
         return assembler.toCollection(list);
     }
 
     //select
     @GetMapping(PATH + "/{id}")
-    EntityModel<Anschrift> select(@PathVariable Long id) {
-        Anschrift value = repository.findById(id).orElseThrow(() -> new AnschriftNotFoundException(id));
+    EntityModel<Zeitzone> select(@PathVariable Long id) {
+        Zeitzone value = repository.findById(id).orElseThrow(() -> new ZeitzoneNotFoundException(id));
         return assembler.toModel(value);
     }
 
     //insert
     @PostMapping(PATH)
-    ResponseEntity<?> insert(@RequestBody Anschrift value) {
-        EntityModel<Anschrift> entityModel = assembler.toModel(repository.save(value));
+    ResponseEntity<?> insert(@RequestBody Zeitzone value) {
+        EntityModel<Zeitzone> entityModel = assembler.toModel(repository.save(value));
         return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
     }
 
     //update
     @PutMapping(PATH + "/{id}")
-    ResponseEntity<?> update(@PathVariable Long id, @RequestBody Anschrift value) {
-        Anschrift updated =  repository.findById(id).map(v -> {
-            v.setAnrede(value.getAnrede());
-            v.setTelefon(value.getTelefon());
-            v.setEmail(value.getEmail());
+    ResponseEntity<?> update(@PathVariable Long id, @RequestBody Zeitzone value) {
+        Zeitzone updated =  repository.findById(id).map(v -> {
+            v.setBezeichnung(value.getBezeichnung());
+            v.setDiffUtc(value.getDiffUtc());
             return repository.save(value);
         }).orElseGet(() -> {
             value.setId(id);
             return repository.save(value);
         });
 
-        EntityModel<Anschrift> entityModel = assembler.toModel(updated);
+        EntityModel<Zeitzone> entityModel = assembler.toModel(updated);
         return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
     }
 

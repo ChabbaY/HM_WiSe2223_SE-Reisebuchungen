@@ -1,8 +1,8 @@
 package com.chabbay.dataobjects;
 
-import com.chabbay.dataobjects.objects.Anschrift;
-import com.chabbay.dataobjects.repositories.AnschriftRepository;
-import com.chabbay.errorhandling.exceptions.AnschriftNotFoundException;
+import com.chabbay.dataobjects.objects.Land;
+import com.chabbay.dataobjects.repositories.LandRepository;
+import com.chabbay.errorhandling.exceptions.LandNotFoundException;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * controller for the anschrift entity that defines endpoints
+ * controller for the land entity that defines endpoints
  *
  * @author Linus Englert
  */
@@ -22,51 +22,51 @@ import java.util.List;
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan(basePackages = {"com.chabbay"})
-public class AnschriftController {
-    private final AnschriftRepository repository;
-    private final AnschriftModelAssembler assembler;
-    private final String PATH = "/anschriften";
+public class LandController {
+    private final LandRepository repository;
+    private final LandModelAssembler assembler;
+    private final String PATH = "/laender";
 
-    public AnschriftController(AnschriftRepository repository, AnschriftModelAssembler assembler) {
+    public LandController(LandRepository repository, LandModelAssembler assembler) {
         this.repository = repository;
         this.assembler = assembler;
     }
 
     //select all
     @GetMapping(PATH)
-    CollectionModel<EntityModel<Anschrift>> selectAll() {
-        List<EntityModel<Anschrift>> list = repository.findAll().stream().map(assembler::toModel).toList();
+    CollectionModel<EntityModel<Land>> selectAll() {
+        List<EntityModel<Land>> list = repository.findAll().stream().map(assembler::toModel).toList();
         return assembler.toCollection(list);
     }
 
     //select
     @GetMapping(PATH + "/{id}")
-    EntityModel<Anschrift> select(@PathVariable Long id) {
-        Anschrift value = repository.findById(id).orElseThrow(() -> new AnschriftNotFoundException(id));
+    EntityModel<Land> select(@PathVariable Long id) {
+        Land value = repository.findById(id).orElseThrow(() -> new LandNotFoundException(id));
         return assembler.toModel(value);
     }
 
     //insert
     @PostMapping(PATH)
-    ResponseEntity<?> insert(@RequestBody Anschrift value) {
-        EntityModel<Anschrift> entityModel = assembler.toModel(repository.save(value));
+    ResponseEntity<?> insert(@RequestBody Land value) {
+        EntityModel<Land> entityModel = assembler.toModel(repository.save(value));
         return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
     }
 
     //update
     @PutMapping(PATH + "/{id}")
-    ResponseEntity<?> update(@PathVariable Long id, @RequestBody Anschrift value) {
-        Anschrift updated =  repository.findById(id).map(v -> {
-            v.setAnrede(value.getAnrede());
-            v.setTelefon(value.getTelefon());
-            v.setEmail(value.getEmail());
+    ResponseEntity<?> update(@PathVariable Long id, @RequestBody Land value) {
+        Land updated =  repository.findById(id).map(v -> {
+            v.setName(value.getName());
+            v.setAmtssprache(value.getAmtssprache());
+            v.setIso2(value.getIso2());
             return repository.save(value);
         }).orElseGet(() -> {
             value.setId(id);
             return repository.save(value);
         });
 
-        EntityModel<Anschrift> entityModel = assembler.toModel(updated);
+        EntityModel<Land> entityModel = assembler.toModel(updated);
         return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
     }
 

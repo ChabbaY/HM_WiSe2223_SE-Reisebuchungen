@@ -1,8 +1,8 @@
 package com.chabbay.dataobjects;
 
-import com.chabbay.dataobjects.objects.Anschrift;
-import com.chabbay.dataobjects.repositories.AnschriftRepository;
-import com.chabbay.errorhandling.exceptions.AnschriftNotFoundException;
+import com.chabbay.dataobjects.objects.Adresse;
+import com.chabbay.dataobjects.repositories.AdresseRepository;
+import com.chabbay.errorhandling.exceptions.AdresseNotFoundException;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * controller for the anschrift entity that defines endpoints
+ * controller for the adresse entity that defines endpoints
  *
  * @author Linus Englert
  */
@@ -22,51 +22,53 @@ import java.util.List;
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan(basePackages = {"com.chabbay"})
-public class AnschriftController {
-    private final AnschriftRepository repository;
-    private final AnschriftModelAssembler assembler;
-    private final String PATH = "/anschriften";
+public class AdresseController {
+    private final AdresseRepository repository;
+    private final AdresseModelAssembler assembler;
+    private final String PATH = "/adressen";
 
-    public AnschriftController(AnschriftRepository repository, AnschriftModelAssembler assembler) {
+    public AdresseController(AdresseRepository repository, AdresseModelAssembler assembler) {
         this.repository = repository;
         this.assembler = assembler;
     }
 
     //select all
     @GetMapping(PATH)
-    CollectionModel<EntityModel<Anschrift>> selectAll() {
-        List<EntityModel<Anschrift>> list = repository.findAll().stream().map(assembler::toModel).toList();
+    CollectionModel<EntityModel<Adresse>> selectAll() {
+        List<EntityModel<Adresse>> list = repository.findAll().stream().map(assembler::toModel).toList();
         return assembler.toCollection(list);
     }
 
     //select
     @GetMapping(PATH + "/{id}")
-    EntityModel<Anschrift> select(@PathVariable Long id) {
-        Anschrift value = repository.findById(id).orElseThrow(() -> new AnschriftNotFoundException(id));
+    EntityModel<Adresse> select(@PathVariable Long id) {
+        Adresse value = repository.findById(id).orElseThrow(() -> new AdresseNotFoundException(id));
         return assembler.toModel(value);
     }
 
     //insert
     @PostMapping(PATH)
-    ResponseEntity<?> insert(@RequestBody Anschrift value) {
-        EntityModel<Anschrift> entityModel = assembler.toModel(repository.save(value));
+    ResponseEntity<?> insert(@RequestBody Adresse value) {
+        EntityModel<Adresse> entityModel = assembler.toModel(repository.save(value));
         return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
     }
 
     //update
     @PutMapping(PATH + "/{id}")
-    ResponseEntity<?> update(@PathVariable Long id, @RequestBody Anschrift value) {
-        Anschrift updated =  repository.findById(id).map(v -> {
-            v.setAnrede(value.getAnrede());
-            v.setTelefon(value.getTelefon());
-            v.setEmail(value.getEmail());
+    ResponseEntity<?> update(@PathVariable Long id, @RequestBody Adresse value) {
+        Adresse updated =  repository.findById(id).map(v -> {
+            v.setStrasse(value.getStrasse());
+            v.setHausnummer(value.getHausnummer());
+            v.setPostleitzahl(value.getPostleitzahl());
+            v.setOrt(value.getOrt());
+            v.setAdresszusatz(value.getAdresszusatz());
             return repository.save(value);
         }).orElseGet(() -> {
             value.setId(id);
             return repository.save(value);
         });
 
-        EntityModel<Anschrift> entityModel = assembler.toModel(updated);
+        EntityModel<Adresse> entityModel = assembler.toModel(updated);
         return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
     }
 
