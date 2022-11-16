@@ -25,8 +25,6 @@ public class AdresseModelAssembler implements RepresentationModelAssembler<Adres
     }
 
     public CollectionModel<EntityModel<Adresse>> toCollection(List<EntityModel<Adresse>> entities) {
-        return CollectionModel.of(entities,
-                linkTo(methodOn(AdresseController.class).selectAll()).withSelfRel(),
-                linkTo(methodOn(RootController.class).root()).withRel("root"));
+        return CollectionModel.of(entities, linkTo(methodOn(AdresseController.class).selectAll()).withSelfRel());
     }
 }

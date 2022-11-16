@@ -3,6 +3,7 @@ package com.chabbay.dataobjects;
 import com.chabbay.dataobjects.objects.Adresse;
 import com.chabbay.dataobjects.repositories.AdresseRepository;
 import com.chabbay.errorhandling.exceptions.AdresseNotFoundException;
+import io.swagger.annotations.Api;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +23,7 @@ import java.util.List;
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan(basePackages = {"com.chabbay"})
+@Api(tags="Adresse")
 public class AdresseController {
     private final AdresseRepository repository;
     private final AdresseModelAssembler assembler;

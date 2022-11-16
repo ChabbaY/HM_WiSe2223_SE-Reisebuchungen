@@ -3,6 +3,7 @@ package com.chabbay.dataobjects;
 import com.chabbay.dataobjects.objects.Land;
 import com.chabbay.dataobjects.repositories.LandRepository;
 import com.chabbay.errorhandling.exceptions.LandNotFoundException;
+import io.swagger.annotations.Api;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +23,7 @@ import java.util.List;
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan(basePackages = {"com.chabbay"})
+@Api(tags="Land")
 public class LandController {
     private final LandRepository repository;
     private final LandModelAssembler assembler;

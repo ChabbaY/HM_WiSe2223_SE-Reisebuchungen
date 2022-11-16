@@ -3,6 +3,7 @@ package com.chabbay.dataobjects;
 import com.chabbay.dataobjects.objects.Hotel;
 import com.chabbay.dataobjects.repositories.HotelRepository;
 import com.chabbay.errorhandling.exceptions.HotelNotFoundException;
+import io.swagger.annotations.Api;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +23,7 @@ import java.util.List;
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan(basePackages = {"com.chabbay"})
+@Api(tags="Hotel")
 public class HotelController {
     private final HotelRepository repository;
     private final HotelModelAssembler assembler;

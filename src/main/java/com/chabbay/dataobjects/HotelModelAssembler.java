@@ -25,8 +25,6 @@ public class HotelModelAssembler implements RepresentationModelAssembler<Hotel, 
     }
 
     public CollectionModel<EntityModel<Hotel>> toCollection(List<EntityModel<Hotel>> entities) {
-        return CollectionModel.of(entities,
-                linkTo(methodOn(HotelController.class).selectAll()).withSelfRel(),
-                linkTo(methodOn(RootController.class).root()).withRel("root"));
+        return CollectionModel.of(entities, linkTo(methodOn(HotelController.class).selectAll()).withSelfRel());
     }
 }

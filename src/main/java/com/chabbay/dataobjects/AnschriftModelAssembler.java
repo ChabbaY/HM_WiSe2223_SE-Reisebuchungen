@@ -25,8 +25,6 @@ public class AnschriftModelAssembler implements RepresentationModelAssembler<Ans
     }
 
     public CollectionModel<EntityModel<Anschrift>> toCollection(List<EntityModel<Anschrift>> entities) {
-        return CollectionModel.of(entities,
-                linkTo(methodOn(AnschriftController.class).selectAll()).withSelfRel(),
-                linkTo(methodOn(RootController.class).root()).withRel("root"));
+        return CollectionModel.of(entities, linkTo(methodOn(AnschriftController.class).selectAll()).withSelfRel());
     }
 }

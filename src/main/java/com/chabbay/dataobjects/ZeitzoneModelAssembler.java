@@ -25,8 +25,6 @@ public class ZeitzoneModelAssembler implements RepresentationModelAssembler<Zeit
     }
 
     public CollectionModel<EntityModel<Zeitzone>> toCollection(List<EntityModel<Zeitzone>> entities) {
-        return CollectionModel.of(entities,
-                linkTo(methodOn(ZeitzoneController.class).selectAll()).withSelfRel(),
-                linkTo(methodOn(RootController.class).root()).withRel("root"));
+        return CollectionModel.of(entities, linkTo(methodOn(ZeitzoneController.class).selectAll()).withSelfRel());
     }
 }

@@ -25,8 +25,6 @@ public class LandModelAssembler implements RepresentationModelAssembler<Land, En
     }
 
     public CollectionModel<EntityModel<Land>> toCollection(List<EntityModel<Land>> entities) {
-        return CollectionModel.of(entities,
-                linkTo(methodOn(LandController.class).selectAll()).withSelfRel(),
-                linkTo(methodOn(RootController.class).root()).withRel("root"));
+        return CollectionModel.of(entities, linkTo(methodOn(LandController.class).selectAll()).withSelfRel());
     }
 }

@@ -3,6 +3,7 @@ package com.chabbay.dataobjects;
 import com.chabbay.dataobjects.objects.Anschrift;
 import com.chabbay.dataobjects.repositories.AnschriftRepository;
 import com.chabbay.errorhandling.exceptions.AnschriftNotFoundException;
+import io.swagger.annotations.Api;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +23,7 @@ import java.util.List;
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan(basePackages = {"com.chabbay"})
+@Api(tags="Anschrift")
 public class AnschriftController {
     private final AnschriftRepository repository;
     private final AnschriftModelAssembler assembler;
