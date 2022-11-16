@@ -1,6 +1,6 @@
 package com.chabbay.errorhandling.advice;
 
-import com.chabbay.errorhandling.exceptions.AdresseNotFoundException;
+import com.chabbay.errorhandling.exceptions.TimezoneNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * @author Linus Englert
  */
 @ControllerAdvice
-public class AdresseNotFoundAdvice {
+public class TimezoneNotFoundAdvice {
     @ResponseBody
-    @ExceptionHandler(AdresseNotFoundException.class)
+    @ExceptionHandler(TimezoneNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String hotelNotFoundHandler(AdresseNotFoundException e) {
+    String hotelNotFoundHandler(TimezoneNotFoundException e) {
         if (e == null) return "";
         return e.getMessage();
     }

@@ -1,8 +1,8 @@
 package com.chabbay.dataobjects;
 
-import com.chabbay.dataobjects.objects.Adresse;
-import com.chabbay.dataobjects.repositories.AdresseRepository;
-import com.chabbay.errorhandling.exceptions.AdresseNotFoundException;
+import com.chabbay.dataobjects.objects.Address;
+import com.chabbay.dataobjects.repositories.AddressRepository;
+import com.chabbay.errorhandling.exceptions.AddressNotFoundException;
 import io.swagger.annotations.Api;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * controller for the adresse entity that defines endpoints
+ * controller for the Address entity that defines endpoints
  *
  * @author Linus Englert
  */
@@ -23,54 +23,54 @@ import java.util.List;
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan(basePackages = {"com.chabbay"})
-@Api(tags="Adresse")
-public class AdresseController {
-    private final AdresseRepository repository;
-    private final AdresseModelAssembler assembler;
-    private final String PATH = "/adressen";
+@Api(tags="Address")
+public class AddressController {
+    private final AddressRepository repository;
+    private final AddressModelAssembler assembler;
+    private final String PATH = "/addresses";
 
-    public AdresseController(AdresseRepository repository, AdresseModelAssembler assembler) {
+    public AddressController(AddressRepository repository, AddressModelAssembler assembler) {
         this.repository = repository;
         this.assembler = assembler;
     }
 
     //select all
     @GetMapping(PATH)
-    CollectionModel<EntityModel<Adresse>> selectAll() {
-        List<EntityModel<Adresse>> list = repository.findAll().stream().map(assembler::toModel).toList();
+    CollectionModel<EntityModel<Address>> selectAll() {
+        List<EntityModel<Address>> list = repository.findAll().stream().map(assembler::toModel).toList();
         return assembler.toCollection(list);
     }
 
     //select
     @GetMapping(PATH + "/{id}")
-    EntityModel<Adresse> select(@PathVariable Long id) {
-        Adresse value = repository.findById(id).orElseThrow(() -> new AdresseNotFoundException(id));
+    EntityModel<Address> select(@PathVariable Long id) {
+        Address value = repository.findById(id).orElseThrow(() -> new AddressNotFoundException(id));
         return assembler.toModel(value);
     }
 
     //insert
     @PostMapping(PATH)
-    ResponseEntity<?> insert(@RequestBody Adresse value) {
-        EntityModel<Adresse> entityModel = assembler.toModel(repository.save(value));
+    ResponseEntity<?> insert(@RequestBody Address value) {
+        EntityModel<Address> entityModel = assembler.toModel(repository.save(value));
         return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
     }
 
     //update
     @PutMapping(PATH + "/{id}")
-    ResponseEntity<?> update(@PathVariable Long id, @RequestBody Adresse value) {
-        Adresse updated =  repository.findById(id).map(v -> {
-            v.setStrasse(value.getStrasse());
-            v.setHausnummer(value.getHausnummer());
-            v.setPostleitzahl(value.getPostleitzahl());
-            v.setOrt(value.getOrt());
-            v.setAdresszusatz(value.getAdresszusatz());
+    ResponseEntity<?> update(@PathVariable Long id, @RequestBody Address value) {
+        Address updated =  repository.findById(id).map(v -> {
+            v.setStreet(value.getStreet());
+            v.setHouseNumber(value.getHouseNumber());
+            v.setPostcode(value.getPostcode());
+            v.setCity(value.getCity());
+            v.setAddressSupplement(value.getAddressSupplement());
             return repository.save(value);
         }).orElseGet(() -> {
             value.setId(id);
             return repository.save(value);
         });
 
-        EntityModel<Adresse> entityModel = assembler.toModel(updated);
+        EntityModel<Address> entityModel = assembler.toModel(updated);
         return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
     }
 

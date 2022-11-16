@@ -1,9 +1,9 @@
 package com.chabbay.main;
 
-import com.chabbay.dataobjects.objects.Anschrift;
+import com.chabbay.dataobjects.objects.AddressInformation;
 import com.chabbay.dataobjects.objects.Hotel;
 import com.chabbay.dataobjects.repositories.HotelRepository;
-import com.chabbay.dataobjects.repositories.AnschriftRepository;
+import com.chabbay.dataobjects.repositories.AddressInformationRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -27,9 +27,9 @@ public class LoadDatabase {
     private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
 
     @Bean
-    CommandLineRunner initAnschriften(AnschriftRepository repository) {
+    CommandLineRunner initAnschriften(AddressInformationRepository repository) {
         return args -> {
-            log.info("Preloading " + repository.save(new Anschrift("Herr", "098 1234567", "abc")));
+            log.info("Preloading " + repository.save(new AddressInformation("Herr", "098 1234567", "abc")));
         };
     }
     @Bean

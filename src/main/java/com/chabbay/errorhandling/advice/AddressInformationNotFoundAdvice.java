@@ -1,6 +1,6 @@
 package com.chabbay.errorhandling.advice;
 
-import com.chabbay.errorhandling.exceptions.AnschriftNotFoundException;
+import com.chabbay.errorhandling.exceptions.AddressInformationNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * @author Linus Englert
  */
 @ControllerAdvice
-public class AnschriftNotFoundAdvice {
+public class AddressInformationNotFoundAdvice {
     @ResponseBody
-    @ExceptionHandler(AnschriftNotFoundException.class)
+    @ExceptionHandler(AddressInformationNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String anschriftNotFoundHandler(AnschriftNotFoundException e) {
+    String anschriftNotFoundHandler(AddressInformationNotFoundException e) {
         if (e == null) return "";
         return e.getMessage();
     }

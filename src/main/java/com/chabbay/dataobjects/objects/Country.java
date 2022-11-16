@@ -4,18 +4,18 @@ import java.util.Objects;
 import javax.persistence.Entity;
 
 /**
- * definition of the Land entity
+ * definition of the Country entity
  *
  * @author Linus Englert
  */
 @Entity
-public class Land extends Data {
-    private String name, amtssprache, iso2;
+public class Country extends Data {
+    private String name, language, iso2;
 
-    public Land() {}
-    public Land(String name, String amtssprache, String iso2) {
+    public Country() {}
+    public Country(String name, String language, String iso2) {
         this.name = name;
-        this.amtssprache = amtssprache;
+        this.language = language;
         this.iso2 = iso2;
     }
 
@@ -26,11 +26,11 @@ public class Land extends Data {
         this.name = name;
     }
 
-    public String getAmtssprache() {
-        return amtssprache;
+    public String getLanguage() {
+        return language;
     }
-    public void setAmtssprache(String amtssprache) {
-        this.amtssprache = amtssprache;
+    public void setLanguage(String amtssprache) {
+        this.language = amtssprache;
     }
 
     public String getIso2() {
@@ -43,19 +43,19 @@ public class Land extends Data {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Land value)) return false;
+        if (!(o instanceof Country value)) return false;
         return Objects.equals(this.id, value.id) &&
                 Objects.equals(this.name, value.name) &&
-                Objects.equals(this.amtssprache, value.amtssprache) &&
+                Objects.equals(this.language, value.language) &&
                 Objects.equals(this.iso2, value.iso2);
     }
     @Override
     public int hashCode() {
-        return Objects.hash(this.id, this.name, this.amtssprache, this.iso2);
+        return Objects.hash(this.id, this.name, this.language, this.iso2);
     }
     @Override
     public String toString() {
-        return String.format("Land{id=%s, name=%s, amtssprache=%s, iso2=%s}",
-                this.id, this.name, this.amtssprache, this.iso2);
+        return String.format("Country{id=%s, name=%s, language=%s, iso2=%s}",
+                this.id, this.name, this.language, this.iso2);
     }
 }

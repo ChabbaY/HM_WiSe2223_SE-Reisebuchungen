@@ -1,6 +1,6 @@
 package com.chabbay.dataobjects.repositories;
 
-import com.chabbay.dataobjects.objects.Anschrift;
+import com.chabbay.dataobjects.objects.Timezone;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
  * @author Linus Englert
  */
 @Repository
-public interface AnschriftRepository extends JpaRepository<Anschrift, Long> {
+public interface TimezoneRepository extends JpaRepository<Timezone, Long> {
 }

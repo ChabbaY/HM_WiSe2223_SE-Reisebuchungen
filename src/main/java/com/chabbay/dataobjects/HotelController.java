@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * controller for the hotel entity that defines endpoints
+ * controller for the Hotel entity that defines endpoints
  *
  * @author Linus Englert
  */

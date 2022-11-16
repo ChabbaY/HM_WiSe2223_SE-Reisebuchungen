@@ -1,6 +1,6 @@
 package com.chabbay.dataobjects.repositories;
 
-import com.chabbay.dataobjects.objects.Adresse;
+import com.chabbay.dataobjects.objects.AddressInformation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
  * @author Linus Englert
  */
 @Repository
-public interface AdresseRepository extends JpaRepository<Adresse, Long> {
+public interface AddressInformationRepository extends JpaRepository<AddressInformation, Long> {
 }

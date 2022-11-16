@@ -10,6 +10,6 @@ public class ErrorMapping implements ErrorController {
     @GetMapping("/error")
     @ResponseBody
     public String error() {
-        return "No Mapping found!";
+        return "❗❗❗No Mapping found!❗❗❗";
     }
 }
