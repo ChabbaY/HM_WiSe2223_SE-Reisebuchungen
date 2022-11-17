@@ -2,7 +2,7 @@ package com.chabbay.dataobjects;
 
 import com.chabbay.dataobjects.objects.Timezone;
 import com.chabbay.dataobjects.repositories.TimezoneRepository;
-import com.chabbay.errorhandling.exceptions.TimezoneNotFoundException;
+import com.chabbay.errorhandling.exceptions.DataNotFoundException;
 import io.swagger.annotations.Api;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
@@ -44,7 +44,8 @@ public class TimezoneController {
     //select
     @GetMapping(PATH + "/{id}")
     EntityModel<Timezone> select(@PathVariable Long id) {
-        Timezone value = repository.findById(id).orElseThrow(() -> new TimezoneNotFoundException(id));
+        Timezone value = repository.findById(id).orElseThrow(() ->
+                new DataNotFoundException(Timezone.class, id));
         return assembler.toModel(value);
     }
 

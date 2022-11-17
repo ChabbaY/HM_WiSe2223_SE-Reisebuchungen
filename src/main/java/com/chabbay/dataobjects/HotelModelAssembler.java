@@ -1,6 +1,7 @@
 package com.chabbay.dataobjects;
 
 import com.chabbay.dataobjects.objects.Hotel;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
@@ -18,13 +19,15 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @Component
 public class HotelModelAssembler implements RepresentationModelAssembler<Hotel, EntityModel<Hotel>> {
     @Override
-    public EntityModel<Hotel> toModel(Hotel entity) {
+    public @NotNull EntityModel<Hotel> toModel(@NotNull Hotel entity) {
         return EntityModel.of(entity,
                 linkTo(methodOn(HotelController.class).select(entity.getId())).withSelfRel(),
                 linkTo(methodOn(HotelController.class).selectAll()).withRel("hotels"));
     }
 
-    public CollectionModel<EntityModel<Hotel>> toCollection(List<EntityModel<Hotel>> entities) {
-        return CollectionModel.of(entities, linkTo(methodOn(HotelController.class).selectAll()).withSelfRel());
+    public CollectionModel<EntityModel<Hotel>> toCollection(
+            List<EntityModel<Hotel>> entities) {
+        return CollectionModel.of(entities,
+                linkTo(methodOn(HotelController.class).selectAll()).withSelfRel());
     }
 }

@@ -3,6 +3,7 @@
     <option name="ACTIVE_PROFILES" />
     <module name="SE-Reisebuchungen" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="com.chabbay.main.Main" />
+    <option name="VM_PARAMETERS" value="-Dcom.sun.management.jmxremote.port=8090 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="com.chabbay.main.*" />

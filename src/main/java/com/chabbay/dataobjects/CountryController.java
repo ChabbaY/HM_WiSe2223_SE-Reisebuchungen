@@ -2,7 +2,7 @@ package com.chabbay.dataobjects;
 
 import com.chabbay.dataobjects.objects.Country;
 import com.chabbay.dataobjects.repositories.CountryRepository;
-import com.chabbay.errorhandling.exceptions.CountryNotFoundException;
+import com.chabbay.errorhandling.exceptions.DataNotFoundException;
 import io.swagger.annotations.Api;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
@@ -44,7 +44,8 @@ public class CountryController {
     //select
     @GetMapping(PATH + "/{id}")
     EntityModel<Country> select(@PathVariable Long id) {
-        Country value = repository.findById(id).orElseThrow(() -> new CountryNotFoundException(id));
+        Country value = repository.findById(id).orElseThrow(() ->
+                new DataNotFoundException(Country.class, id));
         return assembler.toModel(value);
     }
 

@@ -1,6 +1,7 @@
 package com.chabbay.dataobjects;
 
 import com.chabbay.dataobjects.objects.AddressInformation;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
@@ -16,15 +17,18 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
  * @author Linus Englert
  */
 @Component
-public class AddressInformationModelAssembler implements RepresentationModelAssembler<AddressInformation, EntityModel<AddressInformation>> {
+public class AddressInformationModelAssembler
+        implements RepresentationModelAssembler<AddressInformation, EntityModel<AddressInformation>> {
     @Override
-    public EntityModel<AddressInformation> toModel(AddressInformation entity) {
+    public @NotNull EntityModel<AddressInformation> toModel(@NotNull AddressInformation entity) {
         return EntityModel.of(entity,
                 linkTo(methodOn(AddressInformationController.class).select(entity.getId())).withSelfRel(),
                 linkTo(methodOn(AddressInformationController.class).selectAll()).withRel("address information"));
     }
 
-    public CollectionModel<EntityModel<AddressInformation>> toCollection(List<EntityModel<AddressInformation>> entities) {
-        return CollectionModel.of(entities, linkTo(methodOn(AddressInformationController.class).selectAll()).withSelfRel());
+    public CollectionModel<EntityModel<AddressInformation>> toCollection(
+            List<EntityModel<AddressInformation>> entities) {
+        return CollectionModel.of(entities,
+                linkTo(methodOn(AddressInformationController.class).selectAll()).withSelfRel());
     }
 }

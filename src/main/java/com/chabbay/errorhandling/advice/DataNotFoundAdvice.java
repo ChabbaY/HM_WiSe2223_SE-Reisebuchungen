@@ -1,6 +1,6 @@
 package com.chabbay.errorhandling.advice;
 
-import com.chabbay.errorhandling.exceptions.CountryNotFoundException;
+import com.chabbay.errorhandling.exceptions.DataNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * @author Linus Englert
  */
 @ControllerAdvice
-public class CountryNotFoundAdvice {
+public class DataNotFoundAdvice {
     @ResponseBody
-    @ExceptionHandler(CountryNotFoundException.class)
+    @ExceptionHandler(DataNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String hotelNotFoundHandler(CountryNotFoundException e) {
+    String anschriftNotFoundHandler(DataNotFoundException e) {
         if (e == null) return "";
         return e.getMessage();
     }

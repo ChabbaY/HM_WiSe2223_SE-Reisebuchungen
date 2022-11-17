@@ -2,7 +2,7 @@ package com.chabbay.dataobjects;
 
 import com.chabbay.dataobjects.objects.Hotel;
 import com.chabbay.dataobjects.repositories.HotelRepository;
-import com.chabbay.errorhandling.exceptions.HotelNotFoundException;
+import com.chabbay.errorhandling.exceptions.DataNotFoundException;
 import io.swagger.annotations.Api;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
@@ -44,7 +44,8 @@ public class HotelController {
     //select
     @GetMapping(PATH + "/{id}")
     EntityModel<Hotel> select(@PathVariable Long id) {
-        Hotel value = repository.findById(id).orElseThrow(() -> new HotelNotFoundException(id));
+        Hotel value = repository.findById(id).orElseThrow(() ->
+                new DataNotFoundException(Hotel.class, id));
         return assembler.toModel(value);
     }
 

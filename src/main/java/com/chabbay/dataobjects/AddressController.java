@@ -2,7 +2,7 @@ package com.chabbay.dataobjects;
 
 import com.chabbay.dataobjects.objects.Address;
 import com.chabbay.dataobjects.repositories.AddressRepository;
-import com.chabbay.errorhandling.exceptions.AddressNotFoundException;
+import com.chabbay.errorhandling.exceptions.DataNotFoundException;
 import io.swagger.annotations.Api;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
@@ -44,7 +44,8 @@ public class AddressController {
     //select
     @GetMapping(PATH + "/{id}")
     EntityModel<Address> select(@PathVariable Long id) {
-        Address value = repository.findById(id).orElseThrow(() -> new AddressNotFoundException(id));
+        Address value = repository.findById(id).orElseThrow(() ->
+                new DataNotFoundException(Address.class, id));
         return assembler.toModel(value);
     }
 
