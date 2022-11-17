@@ -12,6 +12,9 @@ import javax.persistence.Entity;
 public class Address extends Data {
     private String street, houseNumber, postcode, city, addressSupplement;
 
+    //foreign key
+    private Long addressInformationId;
+
     public Address() {}
     public Address(String street, String houseNumber, String postcode, String city, String addressSupplement) {
         this.street = street;
@@ -56,6 +59,13 @@ public class Address extends Data {
         this.addressSupplement = adresszusatz;
     }
 
+    public Long getAddressInformationId() {
+        return addressInformationId;
+    }
+    public void setAddressInformationId(Long addressInformationId) {
+        this.addressInformationId = addressInformationId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -64,16 +74,17 @@ public class Address extends Data {
                 Objects.equals(this.houseNumber, value.houseNumber) &&
                 Objects.equals(this.postcode, value.postcode) &&
                 Objects.equals(this.city, value.city) &&
-                Objects.equals(this.addressSupplement, value.addressSupplement);
+                Objects.equals(this.addressSupplement, value.addressSupplement) &&
+                Objects.equals(this.addressInformationId, value.addressInformationId);
     }
     @Override
     public int hashCode() {
         return Objects.hash(this.id, this.street, this.houseNumber, this.postcode,
-                this.city, this.addressSupplement);
+                this.city, this.addressSupplement, this.addressInformationId);
     }
     @Override
     public String toString() {
-        return String.format("Address{id=%s, street=%s, houseNumber=%s, postcode=%s, city=%s, addressSupplement=%s}",
-                this.id, this.street, this.houseNumber, this.postcode, this.city, this.addressSupplement);
+        return String.format("Address{id=%s, street=%s, houseNumber=%s, postcode=%s, city=%s, addressSupplement=%s, addressInformationId=%d}",
+                this.id, this.street, this.houseNumber, this.postcode, this.city, this.addressSupplement, this.addressInformationId);
     }
 }

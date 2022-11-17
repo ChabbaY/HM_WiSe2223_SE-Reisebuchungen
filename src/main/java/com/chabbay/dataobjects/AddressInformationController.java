@@ -1,7 +1,9 @@
 package com.chabbay.dataobjects;
 
+import com.chabbay.dataobjects.objects.Address;
 import com.chabbay.dataobjects.objects.AddressInformation;
 import com.chabbay.dataobjects.repositories.AddressInformationRepository;
+import com.chabbay.dataobjects.repositories.AddressRepository;
 import com.chabbay.errorhandling.exceptions.DataNotFoundException;
 import io.swagger.annotations.Api;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -27,11 +29,13 @@ import java.util.List;
 public class AddressInformationController {
     private final AddressInformationRepository repository;
     private final AddressInformationModelAssembler assembler;
+    private final AddressRepository addressRepository;
     private final String PATH = "/addressinformation";
 
-    public AddressInformationController(AddressInformationRepository repository, AddressInformationModelAssembler assembler) {
+    public AddressInformationController(AddressInformationRepository repository, AddressInformationModelAssembler assembler, AddressRepository addressRepository) {
         this.repository = repository;
         this.assembler = assembler;
+        this.addressRepository = addressRepository;
     }
 
     //select all
@@ -77,6 +81,13 @@ public class AddressInformationController {
     @DeleteMapping(PATH + "/{id}")
     ResponseEntity<?> delete(@PathVariable Long id) {
         repository.deleteById(id);
+
+        //cascading delete of referenced Address entities
+        List<Address> addresses = addressRepository.findByAddressInformationId(id);
+        for (Address address : addresses ) {
+            addressRepository.deleteById(address.getId());
+        }
+
         return ResponseEntity.noContent().build();
     }
 }
