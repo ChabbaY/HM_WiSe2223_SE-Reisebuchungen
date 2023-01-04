@@ -1,9 +1,9 @@
 package com.chabbay.dataobjects.objects;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * definition of the Country entity
@@ -11,18 +11,22 @@ import javax.persistence.Entity;
  * @author Linus Englert
  */
 @Entity
-public class Country extends Data {
+public final class Country {
+    private @Id @GeneratedValue long id;
     private String name, language, iso2;
 
-    //foreign key
-    private List<Long> timezoneIds;
-
     public Country() {}
-    public Country(String name, String language, String iso2, List<Long> timezoneIds) {
+    public Country(String name, String language, String iso2) {
         this.name = name;
         this.language = language;
         this.iso2 = iso2;
-        this.timezoneIds = timezoneIds;
+    }
+
+    public long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -35,8 +39,8 @@ public class Country extends Data {
     public String getLanguage() {
         return language;
     }
-    public void setLanguage(String amtssprache) {
-        this.language = amtssprache;
+    public void setLanguage(String language) {
+        this.language = language;
     }
 
     public String getIso2() {
@@ -46,13 +50,6 @@ public class Country extends Data {
         this.iso2 = iso2;
     }
 
-    public List<Long> getTimezoneIds() {
-        return timezoneIds;
-    }
-    public void setTimezoneIds(List<Long> timezoneIds) {
-        this.timezoneIds = timezoneIds;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -60,16 +57,15 @@ public class Country extends Data {
         return Objects.equals(this.id, value.id) &&
                 Objects.equals(this.name, value.name) &&
                 Objects.equals(this.language, value.language) &&
-                Objects.equals(this.iso2, value.iso2) &&
-                Objects.equals(this.timezoneIds, value.timezoneIds);
+                Objects.equals(this.iso2, value.iso2);
     }
     @Override
     public int hashCode() {
-        return Objects.hash(this.id, this.name, this.language, this.iso2, this.timezoneIds);
+        return Objects.hash(this.id, this.name, this.language, this.iso2);
     }
     @Override
     public String toString() {
-        return String.format("Country{id=%s, name=%s, language=%s, iso2=%s, timezoneIds=%s}",
-                this.id, this.name, this.language, this.iso2, Arrays.toString(this.timezoneIds.toArray()));
+        return String.format("Country{id=%s, name=%s, language=%s, iso2=%s}",
+                this.id, this.name, this.language, this.iso2);
     }
 }

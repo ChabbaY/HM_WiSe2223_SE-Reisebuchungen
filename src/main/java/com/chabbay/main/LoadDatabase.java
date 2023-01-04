@@ -33,7 +33,9 @@ public class LoadDatabase {
                     "88888",
                     "Musterstadt",
                     null,
-                    1L)));
+                    1L,
+                    0,
+                    0)));
         };
     }
     @Bean
@@ -51,17 +53,18 @@ public class LoadDatabase {
             log.info("Preloading " + repository.save(new Country(
                     "Deutschland",
                     "Deutsch",
-                    "DE",
-                    null)));
+                    "DE")));
         };
     }
     @Bean
     CommandLineRunner initDatabase(HotelRepository repository) {
         return args -> {
             log.info("Preloading " + repository.save(new Hotel(
-                    "Hotel 1")));
+                    "Hotel 1",
+                    1)));
             log.info("Preloading " + repository.save(new Hotel(
-                    "Hotel 2")));
+                    "Hotel 2",
+                    1)));
         };
     }
     @Bean
