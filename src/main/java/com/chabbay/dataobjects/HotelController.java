@@ -61,6 +61,7 @@ public class HotelController {
     ResponseEntity<?> update(@PathVariable Long id, @RequestBody Hotel value) {
         Hotel updated =  repository.findById(id).map(v -> {
             v.setName(value.getName());
+            v.setAddressinformationId(value.getAddressinformationId());
             return repository.save(value);
         }).orElseGet(() -> {
             value.setId(id);

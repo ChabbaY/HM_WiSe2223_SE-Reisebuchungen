@@ -51,7 +51,8 @@ public class LoadDatabase {
             log.info("Preloading " + repository.save(new Country(
                     "Deutschland",
                     "Deutsch",
-                    "DE")));
+                    "DE",
+                    null)));
         };
     }
     @Bean

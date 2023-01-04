@@ -64,6 +64,7 @@ public class CustomerController {
             v.setFirstname(value.getFirstname());
             v.setLastname(value.getLastname());
             v.setBirthdate(value.getBirthdate());
+            v.setAddressinformationId(value.getAddressinformationId());
             return repository.save(value);
         }).orElseGet(() -> {
             value.setId(id);

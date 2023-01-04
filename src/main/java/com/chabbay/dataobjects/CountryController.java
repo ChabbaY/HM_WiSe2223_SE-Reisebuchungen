@@ -63,6 +63,7 @@ public class CountryController {
             v.setName(value.getName());
             v.setLanguage(value.getLanguage());
             v.setIso2(value.getIso2());
+            v.setTimezoneIds(value.getTimezoneIds());
             return repository.save(value);
         }).orElseGet(() -> {
             value.setId(id);

@@ -65,6 +65,9 @@ public class AddressController {
             v.setPostcode(value.getPostcode());
             v.setCity(value.getCity());
             v.setAddressSupplement(value.getAddressSupplement());
+            v.setAddressInformationId(value.getAddressInformationId());
+            v.setCountryId(value.getCountryId());
+            v.setTimezoneId(value.getTimezoneId());
             return repository.save(value);
         }).orElseGet(() -> {
             value.setId(id);

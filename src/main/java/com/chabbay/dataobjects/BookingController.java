@@ -62,6 +62,8 @@ public class BookingController {
     ResponseEntity<?> update(@PathVariable Long id, @RequestBody Booking value) {
         Booking updated =  repository.findById(id).map(v -> {
             v.setDate(value.getDate());
+            v.setStatus(value.getStatus());
+            v.setCustomerId(value.getCustomerId());
             return repository.save(value);
         }).orElseGet(() -> {
             value.setId(id);

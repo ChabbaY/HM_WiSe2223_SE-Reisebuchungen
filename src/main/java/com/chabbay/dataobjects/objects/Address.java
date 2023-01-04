@@ -13,17 +13,19 @@ public class Address extends Data {
     private String street, houseNumber, postcode, city, addressSupplement;
 
     //foreign key
-    private long addressInformationId;
+    private long addressInformationId, countryId, timezoneId;
 
     public Address() {}
     public Address(String street, String houseNumber, String postcode, String city, String addressSupplement,
-                   long addressInformationId) {
+                   long addressInformationId, long countryId, long timezoneId) {
         this.street = street;
         this.houseNumber = houseNumber;
         this.postcode = postcode;
         this.city = city;
         this.addressSupplement = addressSupplement;
         this.addressInformationId = addressInformationId;
+        this.countryId = countryId;
+        this.timezoneId = timezoneId;
     }
 
     public String getStreet() {
@@ -61,11 +63,25 @@ public class Address extends Data {
         this.addressSupplement = adresszusatz;
     }
 
-    public Long getAddressInformationId() {
+    public long getAddressInformationId() {
         return addressInformationId;
     }
-    public void setAddressInformationId(Long addressInformationId) {
+    public void setAddressInformationId(long addressInformationId) {
         this.addressInformationId = addressInformationId;
+    }
+
+    public long getCountryId() {
+        return countryId;
+    }
+    public void setCountryId(long countryId) {
+        this.countryId = countryId;
+    }
+
+    public long getTimezoneId() {
+        return timezoneId;
+    }
+    public void setTimezoneId(long timezoneId) {
+        this.timezoneId = timezoneId;
     }
 
     @Override
@@ -77,16 +93,20 @@ public class Address extends Data {
                 Objects.equals(this.postcode, value.postcode) &&
                 Objects.equals(this.city, value.city) &&
                 Objects.equals(this.addressSupplement, value.addressSupplement) &&
-                Objects.equals(this.addressInformationId, value.addressInformationId);
+                Objects.equals(this.addressInformationId, value.addressInformationId) &&
+                Objects.equals(this.countryId, value.countryId) &&
+                Objects.equals(this.timezoneId, value.timezoneId);
     }
     @Override
     public int hashCode() {
         return Objects.hash(this.id, this.street, this.houseNumber, this.postcode,
-                this.city, this.addressSupplement, this.addressInformationId);
+                this.city, this.addressSupplement, this.addressInformationId, countryId, timezoneId);
     }
     @Override
     public String toString() {
-        return String.format("Address{id=%s, street=%s, houseNumber=%s, postcode=%s, city=%s, addressSupplement=%s, addressInformationId=%d}",
-                this.id, this.street, this.houseNumber, this.postcode, this.city, this.addressSupplement, this.addressInformationId);
+        return String.format("Address{id=%s, street=%s, houseNumber=%s, postcode=%s, city=%s, addressSupplement=%s," +
+                        "addressInformationId=%d, countryId=%s, timezoneId=%s}",
+                this.id, this.street, this.houseNumber, this.postcode, this.city, this.addressSupplement,
+                this.addressInformationId, this.countryId, this.timezoneId);
     }
 }

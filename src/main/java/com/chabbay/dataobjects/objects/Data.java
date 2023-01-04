@@ -13,7 +13,7 @@ import javax.persistence.Id;
 public class Data {
     protected @Id @GeneratedValue Long id;
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
     public void setId(Long id) {

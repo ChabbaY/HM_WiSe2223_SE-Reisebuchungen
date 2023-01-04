@@ -61,6 +61,8 @@ public class RoomController {
     @PutMapping(PATH + "/{id}")
     ResponseEntity<?> update(@PathVariable Long id, @RequestBody Room value) {
         Room updated =  repository.findById(id).map(v -> {
+            v.setHotelId(value.getHotelId());
+            v.setRoomTypeId(value.getRoomTypeId());
             return repository.save(value);
         }).orElseGet(() -> {
             value.setId(id);

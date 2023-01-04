@@ -12,11 +12,15 @@ import java.util.Objects;
 public class Customer extends Data {
     private String firstname, lastname, birthdate;
 
+    //foreign key
+    private long addressinformationId;
+
     public Customer() {}
-    public Customer(String firstname, String lastname, String birthdate) {
+    public Customer(String firstname, String lastname, String birthdate, long addressinformationId) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.birthdate = birthdate;
+        this.addressinformationId = addressinformationId;
     }
 
     public String getFirstname() {
@@ -40,6 +44,13 @@ public class Customer extends Data {
         this.birthdate = birthdate;
     }
 
+    public long getAddressinformationId() {
+        return addressinformationId;
+    }
+    public void setAddressinformationId(long addressinformationId) {
+        this.addressinformationId = addressinformationId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -47,15 +58,17 @@ public class Customer extends Data {
         return Objects.equals(this.id, value.id) &&
                 Objects.equals(this.firstname, value.firstname) &&
                 Objects.equals(this.lastname, value.lastname) &&
-                Objects.equals(this.birthdate, value.birthdate);
+                Objects.equals(this.birthdate, value.birthdate) &&
+                Objects.equals(this.addressinformationId, value.addressinformationId);
     }
     @Override
     public int hashCode() {
-        return Objects.hash(this.id, this.firstname, this.lastname, this.birthdate);
+        return Objects.hash(this.id, this.firstname, this.lastname, this.birthdate,
+                this.addressinformationId);
     }
     @Override
     public String toString() {
-        return String.format("Customer{id=%s, firstname=%s, lastname=%s, birthdate=%s}",
-                this.id, this.firstname, this.lastname, this.birthdate);
+        return String.format("Customer{id=%s, firstname=%s, lastname=%s, birthdate=%s, addressinformationId=%s}",
+                this.id, this.firstname, this.lastname, this.birthdate, this.addressinformationId);
     }
 }
