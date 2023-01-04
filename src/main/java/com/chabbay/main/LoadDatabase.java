@@ -32,7 +32,8 @@ public class LoadDatabase {
                     "1",
                     "88888",
                     "Musterstadt",
-                    null)));
+                    null,
+                    1L)));
         };
     }
     @Bean

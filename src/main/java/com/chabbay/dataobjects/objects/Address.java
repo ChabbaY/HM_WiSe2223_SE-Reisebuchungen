@@ -13,15 +13,17 @@ public class Address extends Data {
     private String street, houseNumber, postcode, city, addressSupplement;
 
     //foreign key
-    private Long addressInformationId;
+    private long addressInformationId;
 
     public Address() {}
-    public Address(String street, String houseNumber, String postcode, String city, String addressSupplement) {
+    public Address(String street, String houseNumber, String postcode, String city, String addressSupplement,
+                   long addressInformationId) {
         this.street = street;
         this.houseNumber = houseNumber;
         this.postcode = postcode;
         this.city = city;
         this.addressSupplement = addressSupplement;
+        this.addressInformationId = addressInformationId;
     }
 
     public String getStreet() {
