@@ -2,6 +2,8 @@ package com.chabbay.dataobjects.objects;
 
 import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * definition of the Address entity
@@ -9,7 +11,8 @@ import javax.persistence.Entity;
  * @author Linus Englert
  */
 @Entity
-public class Address extends Data {
+public final class Address {
+    private @Id @GeneratedValue long id;
     private String street, houseNumber, postcode, city, addressSupplement;
 
     //foreign key
@@ -26,6 +29,13 @@ public class Address extends Data {
         this.addressInformationId = addressInformationId;
         this.countryId = countryId;
         this.timezoneId = timezoneId;
+    }
+
+    public long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getStreet() {

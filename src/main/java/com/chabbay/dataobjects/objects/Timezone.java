@@ -2,6 +2,8 @@ package com.chabbay.dataobjects.objects;
 
 import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * definition of the Timezone entity
@@ -9,7 +11,8 @@ import javax.persistence.Entity;
  * @author Linus Englert
  */
 @Entity
-public class Timezone extends Data {
+public final class Timezone {
+    private @Id @GeneratedValue long id;
     private String designation;
     /**
      * difference to UTC time zone
@@ -19,6 +22,13 @@ public class Timezone extends Data {
     public Timezone() {}
     public Timezone(String designation, int diffUtc) {
         this.designation = designation;
+    }
+
+    public long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getDesignation() {

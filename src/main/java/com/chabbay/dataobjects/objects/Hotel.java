@@ -2,6 +2,8 @@ package com.chabbay.dataobjects.objects;
 
 import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * definition of the Hotel entity
@@ -9,16 +11,24 @@ import javax.persistence.Entity;
  * @author Linus Englert
  */
 @Entity
-public class Hotel extends Data {
+public final class Hotel {
+    private @Id @GeneratedValue long id;
     private String name;
 
     //foreign key
-    private long addressinformationId;
+    private long addressInformationId;
 
     public Hotel() {}
-    public Hotel(String name, long addressinformationId) {
+    public Hotel(String name, long addressInformationId) {
         this.name = name;
-        this.addressinformationId = addressinformationId;
+        this.addressInformationId = addressInformationId;
+    }
+
+    public long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -28,11 +38,11 @@ public class Hotel extends Data {
         this.name = name;
     }
 
-    public long getAddressinformationId() {
-        return addressinformationId;
+    public long getAddressInformationId() {
+        return addressInformationId;
     }
-    public void setAddressinformationId(long addressinformationId) {
-        this.addressinformationId = addressinformationId;
+    public void setAddressInformationId(long addressInformationId) {
+        this.addressInformationId = addressInformationId;
     }
 
     @Override
@@ -41,15 +51,15 @@ public class Hotel extends Data {
         if (!(o instanceof Hotel value)) return false;
         return Objects.equals(this.id, value.id) &&
                 Objects.equals(this.name, value.name) &&
-                Objects.equals(this.addressinformationId, value.addressinformationId);
+                Objects.equals(this.addressInformationId, value.addressInformationId);
     }
     @Override
     public int hashCode() {
-        return Objects.hash(this.id, this.name, this.addressinformationId);
+        return Objects.hash(this.id, this.name, this.addressInformationId);
     }
     @Override
     public String toString() {
         return String.format("Hotel{id=%s, name=%s, addressinformationId=%s}",
-                this.id, this.name, this.addressinformationId);
+                this.id, this.name, this.addressInformationId);
     }
 }

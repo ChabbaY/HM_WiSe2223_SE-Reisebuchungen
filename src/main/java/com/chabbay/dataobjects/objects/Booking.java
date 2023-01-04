@@ -1,6 +1,8 @@
 package com.chabbay.dataobjects.objects;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Objects;
 
 /**
@@ -9,7 +11,8 @@ import java.util.Objects;
  * @author Linus Englert
  */
 @Entity
-public class Booking extends Data {
+public final class Booking {
+    private @Id @GeneratedValue long id;
     private String date, status;
 
     //foreign key
@@ -20,6 +23,13 @@ public class Booking extends Data {
         this.date = date;
         this.status = status;
         this.customerId = customerId;
+    }
+
+    public long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getDate() {

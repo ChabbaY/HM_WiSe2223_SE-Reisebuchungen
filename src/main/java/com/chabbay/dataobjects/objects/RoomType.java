@@ -1,6 +1,8 @@
 package com.chabbay.dataobjects.objects;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Objects;
 
 /**
@@ -9,7 +11,8 @@ import java.util.Objects;
  * @author Linus Englert
  */
 @Entity
-public class RoomType extends Data {
+public final class RoomType {
+    private @Id @GeneratedValue long id;
     private String name;
     private double price;
     private int people;
@@ -19,6 +22,13 @@ public class RoomType extends Data {
         this.name = name;
         this.price = price;
         this.people = people;
+    }
+
+    public long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
