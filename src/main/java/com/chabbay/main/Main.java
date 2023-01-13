@@ -16,5 +16,6 @@ import org.springframework.context.annotation.Configuration;
 public class Main {
 	public static void main(String[] args) {
 		SpringApplication.run(Main.class, args);
+		System.out.println("Die Swagger-UI steht unter http://localhost:8080/api/swagger-ui/ zur Verfügung.");
 	}
 }
