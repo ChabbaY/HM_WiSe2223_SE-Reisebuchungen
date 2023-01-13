@@ -51,3 +51,5 @@ Konfiguration von SwaggerUI
 ![Klassendiagramm](uml/Klassendiagramm.drawio.png)
 
 ### BPMN
+
+![BPMN](uml/BPMN.drawio.png)
