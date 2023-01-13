@@ -13,17 +13,18 @@ import java.util.Objects;
 @Entity
 public final class Customer {
     private @Id @GeneratedValue long id;
-    private String firstname, lastname, birthdate;
+    private String number, firstname, lastname, birthdate;
 
     //foreign key
-    private long addressinformationId;
+    private long addressInformationId;
 
     public Customer() {}
-    public Customer(String firstname, String lastname, String birthdate, long addressinformationId) {
+    public Customer(String number, String firstname, String lastname, String birthdate, long addressInformationId) {
+        this.number = number;
         this.firstname = firstname;
         this.lastname = lastname;
         this.birthdate = birthdate;
-        this.addressinformationId = addressinformationId;
+        this.addressInformationId = addressInformationId;
     }
 
     public long getId() {
@@ -31,6 +32,13 @@ public final class Customer {
     }
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     public String getFirstname() {
@@ -54,11 +62,11 @@ public final class Customer {
         this.birthdate = birthdate;
     }
 
-    public long getAddressinformationId() {
-        return addressinformationId;
+    public long getAddressInformationId() {
+        return addressInformationId;
     }
-    public void setAddressinformationId(long addressinformationId) {
-        this.addressinformationId = addressinformationId;
+    public void setAddressInformationId(long addressinformationId) {
+        this.addressInformationId = addressinformationId;
     }
 
     @Override
@@ -66,19 +74,20 @@ public final class Customer {
         if (this == o) return true;
         if (!(o instanceof Customer value)) return false;
         return Objects.equals(this.id, value.id) &&
+                Objects.equals(this.number, value.number) &&
                 Objects.equals(this.firstname, value.firstname) &&
                 Objects.equals(this.lastname, value.lastname) &&
                 Objects.equals(this.birthdate, value.birthdate) &&
-                Objects.equals(this.addressinformationId, value.addressinformationId);
+                Objects.equals(this.addressInformationId, value.addressInformationId);
     }
     @Override
     public int hashCode() {
-        return Objects.hash(this.id, this.firstname, this.lastname, this.birthdate,
-                this.addressinformationId);
+        return Objects.hash(this.id, this.number, this.firstname, this.lastname, this.birthdate,
+                this.addressInformationId);
     }
     @Override
     public String toString() {
-        return String.format("Customer{id=%s, firstname=%s, lastname=%s, birthdate=%s, addressinformationId=%s}",
-                this.id, this.firstname, this.lastname, this.birthdate, this.addressinformationId);
+        return String.format("Customer{id=%s, number=%s, firstname=%s, lastname=%s, birthdate=%s, addressinformationId=%s}",
+                this.id, this.number, this.firstname, this.lastname, this.birthdate, this.addressInformationId);
     }
 }

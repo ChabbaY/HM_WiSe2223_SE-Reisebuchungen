@@ -77,14 +77,7 @@ public class AddressController {
      */
     @PostMapping(PATH)
     ResponseEntity<?> insert(@RequestBody Address value) {
-        //check foreign keys
-        addressInformationRepository.findById(value.getAddressInformationId()).orElseThrow(() ->
-                new DataNotFoundException(AddressInformation.class, value.getAddressInformationId()));
-        countryRepository.findById(value.getCountryId()).orElseThrow(() ->
-                new DataNotFoundException(Country.class, value.getCountryId()));
-        timezoneRepository.findById(value.getTimezoneId()).orElseThrow(() ->
-                new DataNotFoundException(Timezone.class, value.getTimezoneId()));
-
+        checkForeignKeys(value);
         EntityModel<Address> entityModel = assembler.toModel(repository.save(value));
         return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
     }
@@ -93,9 +86,11 @@ public class AddressController {
      * update
      *
      * @Produces 201
+     * @Produces 404 if id not found
      */
     @PutMapping(PATH + "/{id}")
     ResponseEntity<?> update(@PathVariable Long id, @RequestBody Address value) {
+        checkForeignKeys(value);
         Address updated =  repository.findById(id).map(v -> {
             v.setStreet(value.getStreet());
             v.setHouseNumber(value.getHouseNumber());
@@ -119,10 +114,28 @@ public class AddressController {
      * delete
      *
      * @Produces 200
+     * @Produces 404 if not found
      */
     @DeleteMapping(PATH + "/{id}")
     ResponseEntity<?> delete(@PathVariable Long id) {
+        repository.findById(id).orElseThrow(() ->
+                new DataNotFoundException(Address.class, id));
+
         repository.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    /**
+     * checks if the referenced Objects exist
+     *
+     * @throws DataNotFoundException if id does not exist, produces 404
+     */
+    void checkForeignKeys(Address value) throws DataNotFoundException {
+        addressInformationRepository.findById(value.getAddressInformationId()).orElseThrow(() ->
+                new DataNotFoundException(AddressInformation.class, value.getAddressInformationId()));
+        countryRepository.findById(value.getCountryId()).orElseThrow(() ->
+                new DataNotFoundException(Country.class, value.getCountryId()));
+        timezoneRepository.findById(value.getTimezoneId()).orElseThrow(() ->
+                new DataNotFoundException(Timezone.class, value.getTimezoneId()));
     }
 }

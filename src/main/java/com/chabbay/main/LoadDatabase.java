@@ -25,30 +25,7 @@ public class LoadDatabase {
     private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
 
     @Bean
-    CommandLineRunner initAddress(AddressRepository repository) {
-        return args -> {
-            log.info("Preloading " + repository.save(new Address(
-                    "Hauptstraße",
-                    "1",
-                    "88888",
-                    "Musterstadt",
-                    null,
-                    1L,
-                    0,
-                    0)));
-        };
-    }
-    @Bean
-    CommandLineRunner initAddressInformation(AddressInformationRepository repository) {
-        return args -> {
-            log.info("Preloading " + repository.save(new AddressInformation(
-                    "Herr",
-                    "098 1234567",
-                    "abc")));
-        };
-    }
-    @Bean
-    CommandLineRunner initCountry(CountryRepository repository) {
+    CommandLineRunner initCountry(CountryRepository repository) {//id 1
         return args -> {
             log.info("Preloading " + repository.save(new Country(
                     "Deutschland",
@@ -57,22 +34,53 @@ public class LoadDatabase {
         };
     }
     @Bean
-    CommandLineRunner initDatabase(HotelRepository repository) {
-        return args -> {
-            log.info("Preloading " + repository.save(new Hotel(
-                    "Hotel 1",
-                    1)));
-            log.info("Preloading " + repository.save(new Hotel(
-                    "Hotel 2",
-                    1)));
-        };
-    }
-    @Bean
-    CommandLineRunner initTimezone(TimezoneRepository repository) {
+    CommandLineRunner initTimezone(TimezoneRepository repository) {//id 2
         return args -> {
             log.info("Preloading " + repository.save(new Timezone(
                     "UTC+1",
                     1)));
+        };
+    }
+    @Bean
+    CommandLineRunner initCountryTimezone(CountryTimezoneRepository repository) {//id 3
+        return args -> {
+            log.info("Preloading " + repository.save(new CountryTimezone(
+                    1L,
+                    2L)));
+        };
+    }
+    @Bean
+    CommandLineRunner initAddressInformation(AddressInformationRepository repository) {//id 4
+        return args -> {
+            log.info("Preloading " + repository.save(new AddressInformation(
+                    "Herr",
+                    "098 1234567",
+                    "abc@def.gh")));
+        };
+    }
+    @Bean
+    CommandLineRunner initAddress(AddressRepository repository) {//id 5
+        return args -> {
+            log.info("Preloading " + repository.save(new Address(
+                    "Hauptstrasse",
+                    "1A",
+                    "123-456",
+                    "Musterstadt",
+                    null,
+                    4L,
+                    1L,
+                    2L)));
+        };
+    }
+    @Bean
+    CommandLineRunner initCustomer(CustomerRepository repository) {//id 6
+        return args -> {
+            log.info("Preloading " + repository.save(new Customer(
+                    "C1234",
+                    "Max",
+                    "Mustermann",
+                    "01.01.1999",
+                    4L)));
         };
     }
 }
