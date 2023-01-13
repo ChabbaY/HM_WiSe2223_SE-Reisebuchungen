@@ -35,3 +35,19 @@ Passwort-Authentifizierung
 ### com.chabbay.swagger
 
 Konfiguration von SwaggerUI
+
+## Diagramme
+
+### Anwendungsfalldiagramm
+
+![Anwendungsfalldiagramm](uml/Anwendungsfalldiagramm.drawio.png)
+
+### Komponentendiagramm
+
+![Komponentendiagramm](uml/Komponentendiagramm.drawio.png)
+
+### Klassendiagramm
+
+![Klassendiagramm](uml/Klassendiagramm.drawio.png)
+
+### BPMN
